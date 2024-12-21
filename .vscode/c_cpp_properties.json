@@ -1,0 +1,47 @@
+{
+    "env": {
+        "WWISE": "${env:HOME}/.deskmate/wwise/versions/2017.2.7_a",
+        "DMOS_SDK": "${env:HOME}/.deskmate/dmos-sdk/dist/1.1.0-r04"
+    },
+    "configurations": [
+        {
+            "name": "VicOS",
+            "includePath": [
+                "${workspaceFolder}",
+                "${workspaceFolder}/animProcess/src",
+                "${workspaceFolder}/engine",
+                "${workspaceFolder}/platform",
+                "${workspaceFolder}/robot/include",
+                "${workspaceFolder}/generated",
+                "${workspaceFolder}/generated/clad/engine",
+                "${workspaceFolder}/generated/clad/robot",
+                "${workspaceFolder}/generated/clad/util",
+                "${workspaceFolder}/generated/coretech/common",
+                "${workspaceFolder}/generated/coretech/vision",
+                "${workspaceFolder}/lib/audio/include",
+                "${MATEOS_SDK}/prebuilt/include",
+                "${MATEOS_SDK}/prebuilt/include/clang/AST",
+                "${MATEOS_SDK}/sysroot/usr/include",
+                // "${MATEOS_SDK}/sysroot/usr/include/c++/v1"
+            ],
+            // "defines": [
+            //     "MATEOS",
+            //     "LRYA_PLATFORM_MATEOS=1",
+            //     "FACTORY_TEST=0"
+            // ],
+            "intelliSenseMode": "clang-x64",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}",
+                    "${MATEOS_SDK}/prebuilt/include",
+                    "${MATEOS_SDK}/sysroot/usr/include"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "compilerPath": "gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++14"
+        }
+    ],
+    "version": 4
+}

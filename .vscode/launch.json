@@ -1,0 +1,117 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "deskmate:attach:mate-robot",
+            "type": "lldb",
+            "request": "attach",
+            "program": "mate-robot",
+            "initCommands": [
+                "platform select remote-linux",
+                "platform connect connect://${dbgconfig:host}:55001",
+                "settings set target.exec-search-paths ${dbgconfig:lib} ${dbgconfig:bin}"
+            ]
+        },
+        {
+            "name": "deskmate:attach:mate-anim",
+            "type": "lldb",
+            "request": "attach",
+            "program": "mate-anim",
+            "initCommands": [
+                "platform select remote-linux",
+                "platform connect connect://${dbgconfig:host}:55001",
+                "settings set target.exec-search-paths ${dbgconfig:lib} ${dbgconfig:bin}"
+            ]
+        },
+        {
+            "name": "deskmate:attach:mate-engine",
+            "type": "lldb",
+            "request": "attach",
+            "program": "mate-engine",
+            "initCommands": [
+                "platform select remote-linux",
+                "platform connect connect://${dbgconfig:host}:55001",
+                "settings set target.exec-search-paths ${dbgconfig:lib} ${dbgconfig:bin}",
+            ]
+        },
+        {
+            // Note that process launch requires write permission on the filesystem:
+            //   mount -o rw,remount /
+            "name": "deskmate:launch:mate-robot",
+            "type": "lldb",
+            "request": "launch",
+            "program": "/lrya/bin/mate-robot",
+            "initCommands": [
+                "platform select remote-linux",
+                "platform connect connect://${dbgconfig:host}:55001",
+                "settings set target.exec-search-paths ${dbgconfig:lib} ${dbgconfig:bin}"
+            ]
+        },
+        {
+            // Note that process launch requires write permission on the filesystem:
+            //   mount -o rw,remount /
+            "name": "deskmate:launch:mate-anim",
+            "type": "lldb",
+            "request": "launch",
+            "program": "/lrya/bin/mate-anim",
+            "env": {
+                "VIC_ANIM_CONFIG": "/lrya/etc/config/platform_config.json"
+            },
+            "initCommands": [
+                "platform select remote-linux",
+                "platform connect connect://${dbgconfig:host}:55001",
+                "settings set target.exec-search-paths ${dbgconfig:lib} ${dbgconfig:bin}"
+            ]
+        },
+        {
+            // Note that process launch requires write permission on the filesystem:
+            //   mount -o rw,remount /
+            "name": "deskmate:launch:mate-engine",
+            "type": "lldb",
+            "request": "launch",
+            "program": "/lrya/bin/mate-engine",
+            "env": {
+                "VIC_ENGINE_CONFIG": "/lrya/etc/config/platform_config.json"
+            },
+            "initCommands": [
+                "platform select remote-linux",
+                "platform connect connect://${dbgconfig:host}:55001",
+                "settings set target.exec-search-paths ${dbgconfig:lib} ${dbgconfig:bin}",
+            ]
+        },
+        {
+            "name": "mac:launch:test_engine",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/_build/mac/Debug/bin/test_engine",
+            "env": {
+                "GTEST_FILTER": "-BlockWorld*:-Localization*",
+                "LRYAWORKROOT": "_build/tmp",
+                "LRYACONFIGROOT": "_build/mac/Debug/test/engine",
+                "DYLD_LIBRARY_PATH": "_build/mac/Debug/lib:/Applications/Webots.app/lib"
+            },
+            "stopOnEntry": false,
+            "initCommands": [
+                "settings set target.exec-search-paths ${workspaceFolder}/_build/mac/Debug/lib"
+            ]
+        }
+    ],
+    "compounds": [
+        {
+            "name": "deskmate:attach:all",
+            "configurations": [
+                "deskmate:attach:mate-robot",
+                "deskmate:attach:mate-anim",
+                "deskmate:attach:mate-engine"
+            ]
+        },
+        {
+            "name": "deskmate:launch:all",
+            "configurations": [
+                "deskmate:launch:mate-robot",
+                "deskmate:launch:mate-anim",
+                "deskmate:launch:mate-engine"
+            ]
+        }
+    ]
+}
